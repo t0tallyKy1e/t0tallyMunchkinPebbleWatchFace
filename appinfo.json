@@ -10,6 +10,12 @@
     "resources": {
         "media": [
             {
+                "file": "data/tkCharging",
+                "name": "TK_CHARGING",
+                "targetPlatforms": null,
+                "type": "raw"
+            },
+            {
                 "file": "images/alienMunchkinDyingBatt",
                 "name": "ALIEN_DYING_BATT",
                 "targetPlatforms": null,
@@ -26,12 +32,6 @@
                 "name": "ALIEN_MUNCHKIN_CHARGED",
                 "targetPlatforms": null,
                 "type": "bitmap"
-            },
-            {
-                "file": "images/tkCharging",
-                "name": "TK_CHARGING_PNG",
-                "targetPlatforms": null,
-                "type": "png"
             },
             {
                 "file": "images/regMunchkinColorFace",

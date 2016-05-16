@@ -24,32 +24,31 @@ static void handle_bluetooth(bool connected){
     }//close else
 }//close handle_bluetooth
 
-/*
 static void timer_handler(void *context){
-  uint32_t next_delay;
-  //create animation
-  s_sequence = gbitmap_sequence_create_with_resource(RESOURCE_ID_TK_CHARGING_PNG);
+    uint32_t next_delay;
 
-  //create blank gbitmap with animation size
-  GSize frame_size = gbitmap_sequence_get_bitmap_size(s_sequence);
-  s_charging_bitmap = gbitmap_create_blank(frame_size, GBitmapFormat8Bit);
-  
-  if(gbitmap_sequence_update_bitmap_next_frame(s_sequence, s_charging_bitmap, &next_delay)){
-    //put image in layer
-    bitmap_layer_set_bitmap(s_background_layer, s_charging_bitmap);
-    
-    layer_mark_dirty(bitmap_layer_get_layer(s_background_layer));
-    
-    app_timer_register(next_delay, timer_handler, NULL);
-  }//close if
+    if(gbitmap_sequence_update_bitmap_next_frame(s_sequence, s_charging_bitmap, &next_delay)){
+        //put image in layer
+        bitmap_layer_set_bitmap(s_background_layer, s_charging_bitmap);
+
+        layer_mark_dirty(bitmap_layer_get_layer(s_background_layer));
+
+        app_timer_register(next_delay, timer_handler, NULL);
+    }//close if
 }//close timer_handler
-*/
 
 static void handle_battery(BatteryChargeState charge_state){
-    //uint32_t first_delay_ms = 10;
-
     if(charge_state.is_charging){
-        //app_timer_register(first_delay_ms, timer_handler, NULL);
+        //create animation
+        s_sequence = gbitmap_sequence_create_with_resource(RESOURCE_ID_TK_CHARGING);
+    
+        //create blank gbitmap with animation size
+        GSize frame_size = gbitmap_sequence_get_bitmap_size(s_sequence);
+        s_charging_bitmap = gbitmap_create_blank(frame_size, GBitmapFormat8Bit);
+        
+        //initiate
+        uint32_t first_delay_ms = 10;
+        app_timer_register(first_delay_ms, timer_handler, NULL);
     }//close if
     else if(charge_state.charge_percent == 100){
         //create charged image
