@@ -10,38 +10,21 @@ static GFont custom_font;
 
 static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
-
 static GBitmapSequence *s_sequence;
 static GBitmap *s_charging_bitmap;
-
 static GBitmap *s_charged_bitmap;
+static GBitmap *s_dying_bitmap;
 
 static void handle_bluetooth(bool connected){
-  if(connected){
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_BT_CONNECTED);
-  }//close if
-  else{
-    s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_COLOR_FACE);
-  }//close else
+    if(connected){
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_BT_CONNECTED);
+    }//close if
+    else{
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_COLOR_FACE);
+    }//close else
 }//close handle_bluetooth
 
-static void update_time(){
-  //get tm structure
-  time_t temp = time(NULL);
-  struct tm *tick_time = localtime(&temp);
-  
-  //write current minutes/hours into buffer
-  static char s_buffer[8];
-  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
-  
-  //display time
-  text_layer_set_text(s_time_layer, s_buffer);
-}//close update_time
-
-static void tick_handler(struct tm *tick_time, TimeUnits units_changed){
-  update_time();
-}//close tick_handler
-
+/*
 static void timer_handler(void *context){
   uint32_t next_delay;
   //create animation
@@ -60,25 +43,48 @@ static void timer_handler(void *context){
     app_timer_register(next_delay, timer_handler, NULL);
   }//close if
 }//close timer_handler
+*/
 
 static void handle_battery(BatteryChargeState charge_state){
-  uint32_t first_delay_ms = 10;
-  
-  if(charge_state.is_charging){
-    app_timer_register(first_delay_ms, timer_handler, NULL);
-  }//close if
-  else if(charge_state.charge_percent == 100){
-    //create charged image
-    s_charged_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
-  
-    //put image in layer
-    bitmap_layer_set_bitmap(s_background_layer, s_charged_bitmap);
-  }//close else if
-  else{
-    //put image in layer
-    bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-  }//close else
+    //uint32_t first_delay_ms = 10;
+
+    if(charge_state.is_charging){
+        //app_timer_register(first_delay_ms, timer_handler, NULL);
+    }//close if
+    else if(charge_state.charge_percent == 100){
+        //create charged image
+        s_charged_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_DYING_BATT);
+
+        //put image in layer
+        bitmap_layer_set_bitmap(s_background_layer, s_charged_bitmap);
+    }//close else if
+    else if(charge_state.charge_percent < 20){
+        s_dying_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
+        
+        bitmap_layer_set_bitmap(s_background_layer, s_dying_bitmap);
+    }//close else if
+    else{
+        //put image in layer
+        bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+    }//close else
 }//close handle_battery
+
+static void update_time(){
+    //get tm structure
+    time_t temp = time(NULL);
+    struct tm *tick_time = localtime(&temp);
+
+    //write current minutes/hours into buffer
+    static char s_buffer[8];
+    strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
+
+    //display time
+    text_layer_set_text(s_time_layer, s_buffer);
+}//close update_time
+
+static void tick_handler(struct tm *tick_time, TimeUnits units_changed){
+  update_time();
+}//close tick_handler
 
 static void main_window_load(Window *window){
   //window info

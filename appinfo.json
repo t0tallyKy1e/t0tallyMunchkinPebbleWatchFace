@@ -10,6 +10,12 @@
     "resources": {
         "media": [
             {
+                "file": "images/alienMunchkinDyingBatt",
+                "name": "ALIEN_DYING_BATT",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
                 "file": "images/alienMunchkinBTConnected",
                 "name": "ALIEN_BT_CONNECTED",
                 "targetPlatforms": null,
