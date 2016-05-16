@@ -1,0 +1,66 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "kyledemers@gmail.com",
+    "enableMultiJS": true,
+    "longName": "t0tallyMunchkin",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/alienMunchkinBTConnected",
+                "name": "ALIEN_BT_CONNECTED",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/alienMuchkinCharged",
+                "name": "ALIEN_MUNCHKIN_CHARGED",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/tkCharging",
+                "name": "TK_CHARGING_PNG",
+                "targetPlatforms": null,
+                "type": "png"
+            },
+            {
+                "file": "images/regMunchkinColorFace",
+                "name": "REG_MUNCHKIN_COLOR_FACE",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/alienMunchkinColorFace",
+                "name": "ALIEN_MUNCHKIN_COLOR_FACE",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "characterRegex": "[0-9:A-Za-z ]",
+                "compatibility": "2.7",
+                "file": "fonts/t0tallyKy1eFont",
+                "name": "TOTALLYKYLE_40",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "characterRegex": "[0-0:.]",
+                "file": "fonts/kyleHandwritingFont",
+                "name": "HANDWRITING_30",
+                "targetPlatforms": null,
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "t0tallyMunchkin",
+    "uuid": "72ba1481-21dc-4643-9620-5b45976c2c0f",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
