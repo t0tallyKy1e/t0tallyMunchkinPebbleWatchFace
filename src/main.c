@@ -12,8 +12,6 @@ static BitmapLayer *s_background_layer;
 static GBitmap *s_background_bitmap;
 static GBitmapSequence *s_sequence;
 static GBitmap *s_charging_bitmap;
-static GBitmap *s_charged_bitmap;
-static GBitmap *s_dying_bitmap;
 
 static void handle_bluetooth(bool connected){
     if(connected){
@@ -52,15 +50,15 @@ static void handle_battery(BatteryChargeState charge_state){
     }//close if
     else if(charge_state.charge_percent == 100){
         //create charged image
-        s_charged_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_DYING_BATT);
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_DYING_BATT);
 
         //put image in layer
-        bitmap_layer_set_bitmap(s_background_layer, s_charged_bitmap);
+        bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
     }//close else if
     else if(charge_state.charge_percent < 20){
-        s_dying_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
         
-        bitmap_layer_set_bitmap(s_background_layer, s_dying_bitmap);
+        bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
     }//close else if
     else{
         //put image in layer
@@ -133,9 +131,6 @@ static void main_window_unload(Window *window){
   //destroy charging animation
   gbitmap_sequence_destroy(s_sequence);
   gbitmap_destroy(s_charging_bitmap);
-  
-  //destroy charged background
-  gbitmap_destroy(s_charged_bitmap);
   
   //destroy background image layer
   bitmap_layer_destroy(s_background_layer);
