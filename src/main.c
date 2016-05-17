@@ -50,13 +50,13 @@ static void handle_battery(BatteryChargeState charge_state){
     }//close if
     else if(charge_state.charge_percent == 100){
         //create charged image
-        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_DYING_BATT);
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
 
         //put image in layer
         bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
     }//close else if
     else if(charge_state.charge_percent < 20){
-        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_MUNCHKIN_CHARGED);
+        s_background_bitmap = gbitmap_create_with_resource(RESOURCE_ID_ALIEN_DYING_BATT);
         
         bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
     }//close else if
