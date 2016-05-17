@@ -11,6 +11,7 @@
         "media": [
             {
                 "file": "images/t0tallyMunchkinMenuLogo",
+                "menuIcon": true,
                 "name": "TK_MENU_LOGO",
                 "targetPlatforms": null,
                 "type": "bitmap"
@@ -72,8 +73,7 @@
     "shortName": "t0tallyMunchkin",
     "targetPlatforms": [
         "aplite",
-        "basalt",
-        "chalk"
+        "basalt"
     ],
     "uuid": "72ba1481-21dc-4643-9620-5b45976c2c0f",
     "versionLabel": "1.0",
